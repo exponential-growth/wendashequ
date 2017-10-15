@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ximi.wendashequ.dao.UserDao">
+    <!--sql片段-->
+    <sql id="table">user</sql>
+    <sql id="selectFields">id, name, password, salt,head_url</sql>
+    <resultMap id="user" type="com.ximi.wendashequ.model.User">
+        <id column="id" property="id"></id>
+        <result column="name" property="name"></result>
+        <result column="password" property="password"></result>
+        <result column="salt" property="salt"></result>
+        <result column="head_url" property="headUrl"></result>
+    </resultMap>
+    <select id="selectUserById" parameterType="int" resultMap="user">
+        SELECT
+        <include refid="selectFields"/>
+        FROM
+        <include refid="table"/>
+        WHERE id = #{id}
+    </select>
+    <select id="selectUserByName" parameterType="string"
+            resultMap="user">
+        SELECT
+        <include refid="selectFields"/>
+        FROM
+        <include refid="table"/>
+        WHERE name = #{name}
+    </select>
+</mapper>

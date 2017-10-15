@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ximi.wendashequ.dao.QuestionDAO">
+    <!--sql片段-->
+    <sql id="table">question</sql>
+    <sql id="selectFields">id, title, content, comment_count,created_date,user_id
+    </sql>
+    <resultMap id="questions" type="com.ximi.wendashequ.model.Question">
+        <id column="id" property="id"></id>
+        <result column="title" property="title"></result>
+        <result column="content" property="content"></result>
+        <result column="comment_count" property="commentCount"></result>
+        <result column="created_date" property="createDate"></result>
+        <result column="user_id" property="userId"></result>
+    </resultMap>
+    <select id="selectLatestQuestions" resultMap="questions">
+        SELECT
+        <include refid="selectFields"/>
+        FROM
+        <include refid="table"/>
+
+        <if test="userId != 0">
+            WHERE user_id = #{userId}
+        </if>
+        ORDER BY id DESC
+        LIMIT #{offset},#{limit}
+    </select>
+</mapper>

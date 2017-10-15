@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模板</title>
+</head>
+<body>
+    测试模板
+    #*
+    这是块级注释，你看不到啊~
+    *#
+
+    $!{name}
+    ${name} ## 这是注释啊 不会出现啊
+
+    #foreach($animal in $animals)
+        animal:$!{foreach.count}:$animal:$!{foreach.index}
+    #end
+
+    $!{user.name}
+    $!{user.getName()}
+
+
+
+</body>
+</html>
