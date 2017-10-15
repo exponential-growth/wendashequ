@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ximi.wendashequ.dao.TicketDAO">
+    <resultMap id="ticket" type="com.ximi.wendashequ.model.Ticket">
+        <id column="id" property="id"></id>
+        <result column="user_id" property="userId"></result>
+        <result column="ticket" property="ticket"></result>
+        <result column="expire_time" property="expireTime"></result>
+        <result column="status" property="status"></result>
+    </resultMap>
+    <select id="selectByTicket" parameterType="string" resultMap="ticket">
+        SELECT * from ticket WHERE ticket = #{ticket}
+    </select>
+</mapper>

@@ -14,4 +14,5 @@ public interface UserService {
     User findUserById(int id);
     Map<String,String> registerUser(String username, String password);
     Map<String,String> loginUser(String username, String password);
+    void logout(String ticket);
 }

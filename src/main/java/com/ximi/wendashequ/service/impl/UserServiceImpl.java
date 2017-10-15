@@ -1,6 +1,8 @@
 package com.ximi.wendashequ.service.impl;
 
+import com.ximi.wendashequ.dao.TicketDAO;
 import com.ximi.wendashequ.dao.UserDao;
+import com.ximi.wendashequ.model.Ticket;
 import com.ximi.wendashequ.model.User;
 import com.ximi.wendashequ.service.UserService;
 import com.ximi.wendashequ.util.WendaUtil;
@@ -8,6 +10,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -21,6 +24,8 @@ import java.util.UUID;
 public class UserServiceImpl  implements UserService{
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private TicketDAO ticketDAO;
     @Override
     public User findUserById(int id) {
         return userDao.selectUserById(id);
@@ -49,6 +54,10 @@ public class UserServiceImpl  implements UserService{
         user.setHeadUrl("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1507957794750&di=788bd2ca4e75d4c8c6e925bbe98a70db&imgtype=0&src=http%3A%2F%2Fimg5q.duitang.com%2Fuploads%2Fitem%2F201502%2F11%2F20150211103803_BaME4.thumb.224_0.jpeg");
         userDao.addUser(user);
 
+        //登录
+        String ticket = addLoginTicket(user.getId());
+        map.put("ticket",ticket);
+
         return map;
     }
 
@@ -64,6 +73,26 @@ public class UserServiceImpl  implements UserService{
             map.put("msg","密码错误");
             return map;
         }
+
+        String ticket = addLoginTicket(user.getId());
+        map.put("ticket", ticket);
+
         return map;
     }
+
+    private String addLoginTicket(int userId) {
+        Ticket ticket = new Ticket();
+        ticket.setUserId(userId);
+        Date date = new Date();
+        date.setTime(date.getTime() + 1000*3600*24);
+        ticket.setExpireTime(date);
+        ticket.setStatus(0);
+        ticket.setTicket(UUID.randomUUID().toString().replaceAll("-", ""));
+        ticketDAO.addTicket(ticket);
+        return ticket.getTicket();
+    }
+    public void logout(String ticket) {
+        ticketDAO.updateStatus(ticket, 1);
+    }
+
 }
