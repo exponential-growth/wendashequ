@@ -21,4 +21,9 @@ public class QuestionServiceImpl implements QuestionService {
     public List<Question> findQuestions(int userId,int offset,int limit) {
         return questionDAO.selectLatestQuestions(userId,offset,limit);
     }
+
+    @Override
+    public int addQuestion(Question question) {
+        return questionDAO.addQuestion(question);
+    }
 }

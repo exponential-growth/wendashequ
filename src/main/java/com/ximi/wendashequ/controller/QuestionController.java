@@ -1,8 +1,8 @@
 package com.ximi.wendashequ.controller;
 
-import com.ximi.wendashequ.dao.QuestionDAO;
 import com.ximi.wendashequ.model.HostHolder;
 import com.ximi.wendashequ.model.Question;
+import com.ximi.wendashequ.service.QuestionService;
 import com.ximi.wendashequ.util.WendaUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +26,7 @@ public class QuestionController {
     private static final Logger log = LoggerFactory.getLogger(QuestionController.class);
 
     @Autowired
-    private QuestionDAO questionDAO;
+    private QuestionService questionService;
     @Autowired
     private HostHolder hostHolder;
     @RequestMapping(value = "/add",method = RequestMethod.POST)
@@ -43,7 +43,9 @@ public class QuestionController {
                 //强制跳转  返回状态码  999
                 return WendaUtil.getJSONObject(999);
             }
-            int count = questionDAO.addQuestion(question);
+            //设置id
+            question.setUserId(hostHolder.getUser().getId());
+            int count = questionService.addQuestion(question);
             if (count > 0){
                 return WendaUtil.getJSONObject(0);
             }
