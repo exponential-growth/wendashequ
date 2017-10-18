@@ -2477,17 +2477,17 @@ textarea.Input {
     height:100px;
     border-radius:4px
 }
-.avatar.\34 0 {
+.avatar.\34  {
     width:40px;
     height:40px;
     border-radius:4px
 }
-.avatar.\35 0 {
+.avatar.\35  {
     width:50px;
     height:50px;
     border-radius:4px
 }
-.avatar.\36 0 {
+.avatar.\36 {
     width:60px;
     height:60px;
     border-radius:4px
@@ -7855,7 +7855,7 @@ a>.invisible {
     float:left;
     width:61px;
     height:100%;
-    background-image:url(../images/res/nk.png);
+    background-image:url(../images/res/wd.png);
     background-repeat:no-repeat;
     background-position:center;
     text-indent:-9999px;

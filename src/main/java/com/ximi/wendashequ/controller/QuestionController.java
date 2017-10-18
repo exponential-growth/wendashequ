@@ -3,15 +3,14 @@ package com.ximi.wendashequ.controller;
 import com.ximi.wendashequ.model.HostHolder;
 import com.ximi.wendashequ.model.Question;
 import com.ximi.wendashequ.service.QuestionService;
+import com.ximi.wendashequ.service.UserService;
 import com.ximi.wendashequ.util.WendaUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 
@@ -29,6 +28,9 @@ public class QuestionController {
     private QuestionService questionService;
     @Autowired
     private HostHolder hostHolder;
+    @Autowired
+    private UserService userService;
+
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     @ResponseBody
     public String addQuestion(@RequestParam("title") String title,
@@ -54,5 +56,13 @@ public class QuestionController {
         }
 
         return WendaUtil.getJSONObject(1,"失败");
+    }
+    @RequestMapping(value = "/{id}")
+    public String showQuestion(Model model, @PathVariable("id") int id){
+        Question question = questionService.findQuestionById(id);
+        model.addAttribute("question",question);
+        model.addAttribute("user",userService.findUserById(question.getUserId()));
+
+        return "detail";
     }
 }
