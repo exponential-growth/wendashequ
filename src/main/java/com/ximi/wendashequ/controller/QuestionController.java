@@ -1,7 +1,7 @@
 package com.ximi.wendashequ.controller;
 
-import com.ximi.wendashequ.model.HostHolder;
-import com.ximi.wendashequ.model.Question;
+import com.ximi.wendashequ.model.*;
+import com.ximi.wendashequ.service.CommentService;
 import com.ximi.wendashequ.service.QuestionService;
 import com.ximi.wendashequ.service.UserService;
 import com.ximi.wendashequ.util.WendaUtil;
@@ -12,7 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by 陶世磊 on 2017/10/16.
@@ -30,6 +32,9 @@ public class QuestionController {
     private HostHolder hostHolder;
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private CommentService commentService;
 
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     @ResponseBody
@@ -60,9 +65,18 @@ public class QuestionController {
     @RequestMapping(value = "/{id}")
     public String showQuestion(Model model, @PathVariable("id") int id){
         Question question = questionService.findQuestionById(id);
+
         model.addAttribute("question",question);
         model.addAttribute("user",userService.findUserById(question.getUserId()));
 
+        List<Comment> commentLists = commentService.selectComments(EntityType.ENTITY_QUESTION,id);
+        List<ViewObject> details = new ArrayList<ViewObject>();
+        for (Comment comment:commentLists){
+            ViewObject o = new ViewObject();
+            o.set("comment",comment);
+            o.set("user",userService.findUserById(comment.getUserId()));
+            details.add(o);
+        }
         return "detail";
     }
 }
