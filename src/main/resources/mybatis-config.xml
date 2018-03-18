@@ -11,15 +11,11 @@
         <setting name="defaultStatementTimeout" value="3000"/>
         <!-- Enables automatic mapping from classic database column names A_COLUMN to camel case classic Java property names aColumn -->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
-
-        <setting name="autoMappingBehavior" value="FULL"/>
         <!-- Allows JDBC support for generated keys. A compatible driver is required.
         This setting forces generated keys to be used if set to true,
          as some drivers deny compatibility but still work -->
         <setting name="useGeneratedKeys" value="true"/>
-
     </settings>
-
     <!-- Continue going here -->
 
 </configuration>

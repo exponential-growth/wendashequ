@@ -80,6 +80,11 @@ public class UserServiceImpl  implements UserService{
         return map;
     }
 
+    @Override
+    public User findUserByName(String name) {
+        return userDao.selectUserByName(name);
+    }
+
     private String addLoginTicket(int userId) {
         Ticket ticket = new Ticket();
         ticket.setUserId(userId);

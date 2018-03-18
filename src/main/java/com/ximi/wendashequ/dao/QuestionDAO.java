@@ -4,6 +4,7 @@ import com.ximi.wendashequ.model.Question;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -28,4 +29,8 @@ public interface QuestionDAO {
                                          @Param("limit") int limit);
 
     Question selectQuestionById(int id);
+
+    @Update({"UPDATE ",TABLE_NAME," set comment_count = #{commentCount} WHERE id = #{id}"})
+    int updateCommentCount(@Param("id") int id,
+                           @Param("commentCount") int commentCount);
 }

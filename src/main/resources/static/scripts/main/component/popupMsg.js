@@ -88,13 +88,13 @@ var oPopupAdd = new PopupAdd({
                     if (oResult.code === 999) {
                         window.location.href = '/reglogin?next=' + window.encodeURIComponent(window.location.href);
                     } else if (oResult.code !== 0) {
-                        that.error(oResult.msg || '出现错误，请重试');
+                        that.error(oResult.content || '出现错误，请重试aaa');
                     } else {
                         oConf.ok && oConf.ok.call(that);
                         oAdd.emit('ok');
                     }
                 }).fail(function () {
-                    alert('出现错误，请重试');
+                    alert('出现错误，请重试!');
                 }).always(function () {
                     bSubmit = false;
                 });

@@ -70,13 +70,15 @@ public class QuestionController {
         model.addAttribute("user",userService.findUserById(question.getUserId()));
 
         List<Comment> commentLists = commentService.selectComments(EntityType.ENTITY_QUESTION,id);
-        List<ViewObject> details = new ArrayList<ViewObject>();
+        List<ViewObject> details = new ArrayList<>();
         for (Comment comment:commentLists){
             ViewObject o = new ViewObject();
             o.set("comment",comment);
             o.set("user",userService.findUserById(comment.getUserId()));
             details.add(o);
         }
+        //把数据地方到模型
+        model.addAttribute("details",details);
         return "detail";
     }
 }

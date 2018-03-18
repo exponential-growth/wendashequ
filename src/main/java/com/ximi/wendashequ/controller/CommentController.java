@@ -4,6 +4,7 @@ import com.ximi.wendashequ.model.Comment;
 import com.ximi.wendashequ.model.EntityType;
 import com.ximi.wendashequ.model.HostHolder;
 import com.ximi.wendashequ.service.CommentService;
+import com.ximi.wendashequ.service.QuestionService;
 import com.ximi.wendashequ.util.WendaUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,23 +32,32 @@ public class CommentController {
     @Autowired
     CommentService commentService;
 
+    @Autowired
+    QuestionService questionService;
+
     @RequestMapping(path = "/addComment",method = RequestMethod.POST)
     public String addComment(@RequestParam("questionId") int questionId,
                              @RequestParam("content") String content){
         try {
-        Comment comment = new Comment();
-        comment.setContent(content);
-        comment.setEntityId(questionId);
-        if (hostHolder.getUser() != null){
+            Comment comment = new Comment();
+            comment.setContent(content);
+            comment.setEntityId(questionId);
+            if (hostHolder.getUser() != null){
             comment.setUserId(hostHolder.getUser().getId());
-        }else {
-            //匿名用户
-            comment.setUserId(WendaUtil.ANONYMOUS_USERID);
-        }
-        comment.setCreatedTime(new Date());
-        comment.setEntityType(EntityType.ENTITY_QUESTION);
+            }else {
+                //匿名用户
+                comment.setUserId(WendaUtil.ANONYMOUS_USERID);
+            }
+            comment.setCreatedTime(new Date());
+            comment.setEntityType(EntityType.ENTITY_QUESTION);
 
-        commentService.addComment(comment);
+            commentService.addComment(comment);
+
+            //获取评论数量
+            int count = commentService.getCommentCount(EntityType.ENTITY_QUESTION,questionId);
+
+            //更新问题表的评论数量
+            questionService.addCommentCount(questionId,count);
 
         }catch (Exception e){
             logger.error("添加评论出现异常："+e.getMessage());

@@ -77,7 +77,7 @@
                  data-widget="navigable" data-navigable-options="{&quot;items&quot;: &quot;&gt;.zm-item-answer&quot;}"
                  data-init="{&quot;params&quot;: {&quot;url_token&quot;: 36301524, &quot;pagesize&quot;: 10, &quot;offset&quot;: 0}, &quot;nodename&quot;: &quot;QuestionAnswerListV2&quot;}">
 
-                #foreach($comment in $comments)
+                #foreach($detail in $details)
                 <div tabindex="-1" class="zm-item-answer  zm-item-expanded" itemprop="topAnswer" itemscope=""
                      itemtype="http://schema.org/Answer" data-aid="22162611" data-atoken="66862039" data-collapsed="0"
                      data-created="1444310527" data-deleted="0" data-helpful="1" data-isowner="0" data-copyable="1"
@@ -99,9 +99,10 @@
                         <div class="zm-item-answer-author-info">
                             <a class="zm-item-link-avatar avatar-link" href="" target="_blank"
                                data-tip="p$t$yingxiaodao">
-                                <img src="$comment.user.headUrl"
+
+                                <img src="$detail.user.headUrl"
                                      class="zm-list-avatar avatar"></a>
-                            <a class="author-link" target="_blank" href="/user/$comment.user.id">$comment.user.name</a>
+                            <a class="author-link" target="_blank" href="/user/$comment.user.id">$detail.user.name</a>
                             </div>
                         <div class="zm-item-vote-info" data-votecount="28" data-za-module="VoteInfo">
                                 <span class="voters text">
@@ -113,14 +114,14 @@
                          data-action="/answer/content" data-author-name="营销岛"
                          data-entry-url="/question/36301524/answer/66862039">
                         <div class="zm-editable-content clearfix">
-                            $comment.comment.content
+                            $detail.comment.content
                         </div>
                     </div>
                     <a class="zg-anchor-hidden ac" name="22162611-comment"></a>
                     <div class="zm-item-meta answer-actions clearfix js-contentActions">
                         <div class="zm-meta-panel">
                             <a itemprop="url" class="answer-date-link meta-item" target="_blank" href="">发布于
-                                $date.format('yyyy-MM-dd HH:mm:ss', $comment.comment.createdDate)</a>
+                                $date.format('yyyy-MM-dd HH:mm:ss', $detail.comment.createdTime)</a>
 
                             <!--
                             <a href="" name="addcomment" class="meta-item toggle-comment js-toggleCommentBox">
@@ -143,7 +144,7 @@
             <div id="zh-question-answer-form-wrap" class="zh-question-answer-form-wrap">
                 <div class="zm-editable-editor-wrap" style="">
                     <div class="zm-editable-editor-outer">
-                        <div class="zm-editable-editor-field-wrap">
+                        <div class="zm-editable-edit or-field-wrap">
                             <textarea name="content" id="content" class="zm-editable-editor-field-element editable" style="font-style: italic;width:100%;"></textarea>
                         </div>
                     </div>

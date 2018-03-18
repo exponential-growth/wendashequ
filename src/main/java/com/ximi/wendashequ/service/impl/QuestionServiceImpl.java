@@ -43,4 +43,9 @@ public class QuestionServiceImpl implements QuestionService {
         return questionDAO.selectQuestionById(id);
     }
 
+    @Override
+    public int addCommentCount(int id, int commentCount) {
+        return questionDAO.updateCommentCount(id,commentCount);
+    }
+
 }
