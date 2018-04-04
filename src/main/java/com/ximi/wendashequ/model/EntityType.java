@@ -1,7 +1,7 @@
 package com.ximi.wendashequ.model;
 
 /**
- * Created by 陶世磊 on 2018/3/7.
+ * Created by 单广美 on 2018/3/7.
  *
  * @Description:
  */

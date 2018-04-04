@@ -3,7 +3,7 @@ package com.ximi.wendashequ.model;
 import lombok.Data;
 
 /**
- * Created by 陶世磊 on 2017/10/10.
+ * Created by 单广美 on 2017/10/10.
  *
  * @Description:
  */

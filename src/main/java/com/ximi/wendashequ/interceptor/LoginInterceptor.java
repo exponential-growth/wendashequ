@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Created by 陶世磊 on 2017/10/15.
+ * Created by 单广美 on 2017/10/15.
  *
  * @Description:  登录拦截器
  */

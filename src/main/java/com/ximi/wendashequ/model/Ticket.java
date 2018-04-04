@@ -3,7 +3,7 @@ package com.ximi.wendashequ.model;
 import java.util.Date;
 
 /**
- * Created by 陶世磊 on 2017/10/15.
+ * Created by 单广美 on 2017/10/15.
  *
  * @Description:  凭证
  */

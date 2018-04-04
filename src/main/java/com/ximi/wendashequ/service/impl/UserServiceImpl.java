@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * Created by 陶世磊 on 2017/10/11.
+ * Created by 单广美 on 2017/10/11.
  *
  * @Description:  用户
  */

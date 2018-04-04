@@ -4,7 +4,7 @@ import com.ximi.wendashequ.model.User;
 import org.apache.ibatis.annotations.*;
 
 /**
- * Created by 陶世磊 on 2017/10/11.
+ * Created by 单广美 on 2017/10/11.
  *
  * @Description:  通过  注解  的方式整合mybatis
  */

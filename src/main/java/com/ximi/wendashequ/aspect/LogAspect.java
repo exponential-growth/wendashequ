@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
- * Created by 陶世磊 on 2017/10/10.
+ * Created by 单广美 on 2017/10/10.
  *
  * @Description: aop处理日志信息
  */

@@ -4,7 +4,7 @@ import com.ximi.wendashequ.model.Ticket;
 import org.apache.ibatis.annotations.*;
 
 /**
- * Created by 陶世磊 on 2017/10/15.
+ * Created by 单广美 on 2017/10/15.
  *
  * @Description:
  */
