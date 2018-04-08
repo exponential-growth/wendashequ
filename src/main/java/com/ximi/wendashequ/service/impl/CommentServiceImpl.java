@@ -44,4 +44,10 @@ public class CommentServiceImpl implements CommentService {
     public boolean deleteComment(int id, int status) {
         return  commentDao.updateStatus(id,status) > 0;
     }
+
+    @Override
+    public Comment getCommentById(int commentId) {
+
+        return commentDao.selectCommentById(commentId);
+    }
 }

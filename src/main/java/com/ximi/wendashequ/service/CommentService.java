@@ -15,4 +15,5 @@ public interface CommentService {
     List<Comment> selectComments(int entityType,int entityId);
     int getCommentCount(int entityType,int entityId);
     boolean deleteComment(int id,int status);
+    Comment getCommentById(int commentId);
 }

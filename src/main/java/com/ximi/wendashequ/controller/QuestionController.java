@@ -2,6 +2,7 @@ package com.ximi.wendashequ.controller;
 
 import com.ximi.wendashequ.model.*;
 import com.ximi.wendashequ.service.CommentService;
+import com.ximi.wendashequ.service.LikeService;
 import com.ximi.wendashequ.service.QuestionService;
 import com.ximi.wendashequ.service.UserService;
 import com.ximi.wendashequ.util.WendaUtil;
@@ -35,6 +36,9 @@ public class QuestionController {
 
     @Autowired
     private CommentService commentService;
+
+    @Autowired
+    private LikeService likeService;
 
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     @ResponseBody
@@ -73,6 +77,12 @@ public class QuestionController {
         List<ViewObject> details = new ArrayList<>();
         for (Comment comment:commentLists){
             ViewObject o = new ViewObject();
+            if (hostHolder.getUser() == null){
+                o.set("liked",0);
+            }else {
+                o.set("liked",likeService.getLikeStatus(hostHolder.getUser().getId(),EntityType.ENTITY_COMMENT,comment.getId()));
+            }
+            o.set("likeCount",likeService.getLikeCount(EntityType.ENTITY_COMMENT,comment.getId()));
             o.set("comment",comment);
             o.set("user",userService.findUserById(comment.getUserId()));
             details.add(o);

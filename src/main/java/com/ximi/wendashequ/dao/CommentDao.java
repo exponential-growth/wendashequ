@@ -33,4 +33,6 @@ public interface CommentDao {
     @Select({"UPDATE ",TABLE_NAME," SET status = #{status} WHERE  id = #{id}"})
     int updateStatus(@Param("id") int id,
                      @Param("status") int status);
+    @Select({"select * from",TABLE_NAME,"where id = #{commentId}"})
+    Comment selectCommentById(@Param("commentId") int commentId);
 }

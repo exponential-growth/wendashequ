@@ -4,6 +4,7 @@ import com.ximi.wendashequ.model.Comment;
 import com.ximi.wendashequ.model.EntityType;
 import com.ximi.wendashequ.model.HostHolder;
 import com.ximi.wendashequ.service.CommentService;
+import com.ximi.wendashequ.service.LikeService;
 import com.ximi.wendashequ.service.QuestionService;
 import com.ximi.wendashequ.util.WendaUtil;
 import org.slf4j.Logger;
@@ -34,6 +35,9 @@ public class CommentController {
 
     @Autowired
     QuestionService questionService;
+
+    @Autowired
+    LikeService likeService;
 
     @RequestMapping(path = "/addComment",method = RequestMethod.POST)
     public String addComment(@RequestParam("questionId") int questionId,

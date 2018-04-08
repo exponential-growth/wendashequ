@@ -53,6 +53,7 @@ public class LoginController {
             return "login";
         }
     }
+
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public String login(Model model, @RequestParam("username") String username,
                            @RequestParam("password") String password,
