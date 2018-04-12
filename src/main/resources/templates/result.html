@@ -1,0 +1,45 @@
+#set($bodyclass = "page-search")
+#parse("header.html")
+<link rel="stylesheet" href="../styles/result.css">
+<link rel="stylesheet" href="../styles/detail.css">
+<div class="zg-wrap zu-main clearfix" role="main">
+    <div class="zu-main-content">
+        <div class="zu-main-content-inner">
+            为您找到 $resultCount 条结果。
+            <hr/>
+            #if($resultCount == 0)
+                <div>
+                    <img src="../images/res/404.png" alt="404啦">
+                    您搜索的数据，我们暂时没有哦...
+                </div>
+            #else
+                #foreach($vo in $vos)
+
+                    <div class="title">
+                        <a target="_blank" href="/user/$!{vo.user.id}" class="js-title-link">$!{vo.question.title}</a>
+                    </div>
+                    <div class="content">
+                        <ul class="answers">
+                            <li class="answer-item clearfix">
+                                <div class="entry answer">
+                                    <div class="entry-body">
+                                        <div class="entry-meta">
+                                            <strong class="author-line"><a class="author" href="/user/$!{vo.user.id}">$!{vo.user.name}</a>，$date.format('yyyy-MM-dd HH:mm:ss', $!{vo.question.createDate})</strong>
+                                        </div>
+                                        <div class="entry-content js-collapse-body">
+                                            <div class="summary hidden-expanded" style="">
+                                            $!{vo.question.content}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                #end
+            #end
+
+        </div>
+    </div>
+</div>
+#parse("footer.html")

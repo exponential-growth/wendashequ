@@ -86,7 +86,7 @@ var oPopupAdd = new PopupAdd({
                 }).done(function (oResult) {
                     // 未登陆，跳转到登陆页面
                     if (oResult.code === 999) {
-                        window.location.href = '/reglogin?next=' + window.encodeURIComponent(window.location.href);
+                        window.location.href = '/reLogin?next=' + window.encodeURIComponent(window.location.href);
                     } else if (oResult.code !== 0) {
                         that.error(oResult.content || '出现错误，请重试aaa');
                     } else {

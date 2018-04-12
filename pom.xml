@@ -5,8 +5,8 @@
 
 	<groupId>com.ximi</groupId>
 	<artifactId>wendashequ</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<version>1.2</version>
+	<packaging>war</packaging>
 
 	<name>wendashequ</name>
 	<description>Demo project for Spring Boot</description>
@@ -79,6 +79,14 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+		<!--加入solr对java的支持-->
+		<!-- https://mvnrepository.com/artifact/org.apache.solr/solr-solrj -->
+		<dependency>
+			<groupId>org.apache.solr</groupId>
+			<artifactId>solr-solrj</artifactId>
+			<version>6.6.3</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -86,6 +94,9 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>com.ximi.wendashequ.WendashequApplication</mainClass>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

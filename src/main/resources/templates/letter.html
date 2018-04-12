@@ -2,6 +2,15 @@
 <link rel="stylesheet" href="../styles/letter.css">
     <div id="main">
         <div class="zg-wrap zu-main clearfix ">
+
+            #if($conversations.size() == 0)
+                <div>
+                    <p style="text-align: center;color: rgba(40,21,90,0.47);">您暂时没有私信消息哦...</p>
+                    <img src="../images/res/404.png"  style="margin: auto;  position: absolute;  top: 0;left: 0; bottom: 0;right: 0;  " alt="404啦">
+                </div>
+
+
+            #else
             <ul class="letter-list">
                 #foreach ($conversation in $conversations)
                 <li id="conversation-item-10001_622873">
@@ -44,6 +53,7 @@
                 </li>
                 #end
             </ul>
+            #end
 
         </div>
     </div>

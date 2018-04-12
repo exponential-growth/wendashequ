@@ -4,17 +4,20 @@
         <div class="zu-main-content">
             <div class="zu-main-content-inner">
                 <div class="zg-section" id="zh-home-list-title">
-                    <i class="zg-icon zg-icon-feedlist"></i>最新动态
+                    <i class="zg-icon zg-icon-feedlist"></i>动态
                     <input type="hidden" id="is-topstory">
-                    <!--
-                    <span class="zg-right zm-noti-cleaner-setting" style="list-style:none">
-                        <a href="https://nowcoder.com/settings/filter" class="zg-link-gray-normal">
-                            <i class="zg-icon zg-icon-settings"></i>设置</a></span>
-                            -->
                 </div>
                 <div class="zu-main-feed-con navigable" data-feedtype="topstory" id="zh-question-list" data-widget="navigable" data-navigable-options="{&quot;items&quot;:&quot;&gt; .zh-general-list .feed-content&quot;,&quot;offsetTop&quot;:-82}">
                     <a href="javascript:;" class="zu-main-feed-fresh-button" id="zh-main-feed-fresh-button" style="display:none"></a>
                     <div id="js-home-feed-list" class="zh-general-list topstory clearfix" data-init="{&quot;params&quot;: {}, &quot;nodename&quot;: &quot;TopStory2FeedList&quot;}" data-delayed="true" data-za-module="TopStoryFeedList">
+
+                        #if($vos.size() == 0)
+                        <div>
+                            <p style="text-align: center;color: rgba(40,21,90,0.47);">您没有发布过动态哦！当然是空空的啦！</p>
+                            <img src="../images/res/404.png"  style="margin: auto;  position: absolute;  top:200px;left: 0; bottom: 0;right: 0;  " alt="404啦">
+                        </div>
+
+                        #else
 
                         #foreach($vo in $vos)
                         <div class="feed-item folding feed-item-hook feed-item-2
@@ -70,6 +73,7 @@
                                 </div>
                             </div>
                         </div>
+                        #end
                         #end
                     </div>
                     <!--
