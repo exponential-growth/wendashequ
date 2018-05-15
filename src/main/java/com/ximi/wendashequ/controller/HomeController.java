@@ -28,7 +28,7 @@ public class HomeController {
 
     @RequestMapping(value = {"/", "index"}, method = RequestMethod.GET)
     public String index(Model model) {
-        model.addAttribute("vos", getQuestions(0, 0, 5));
+        model.addAttribute("vos", getQuestions(0, 0, 20));
         return "index";
     }
 
