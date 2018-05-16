@@ -1,7 +1,7 @@
 package com.ximi.wendashequ.util;
 
 //import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
-
+// redis工具类
 public class RedisKeyUtil {
     private static String SPLIT = ":";
     private static String BIZ_LIKE = "LIKE";

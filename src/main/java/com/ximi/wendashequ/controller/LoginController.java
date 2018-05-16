@@ -21,14 +21,17 @@ import java.util.Map;
  */
 @Controller
 public class LoginController {
+    //注入  用户服务层
     @Autowired
     private UserService userService;
+    // 重新登录
     @RequestMapping(value = "/reLogin",method = RequestMethod.GET)
     public String reLogin(Model model,
                           @RequestParam(value = "next",required = false) String next){
         model.addAttribute("next", next);
         return "login";
     }
+    // 注册
     @RequestMapping(value = "/register",method = RequestMethod.POST)
     public String register(Model model, @RequestParam("username") String username,
                            @RequestParam("password") String password,
@@ -37,6 +40,7 @@ public class LoginController {
                            @RequestParam(value = "next",required = false) String next){
 
         Map<String,String> map = userService.registerUser(username,password);
+        // 保存用户cookie
         if (map.containsKey("ticket")) {
             Cookie cookie = new Cookie("ticket", map.get("ticket").toString());
             cookie.setPath("/");
@@ -53,7 +57,7 @@ public class LoginController {
             return "login";
         }
     }
-
+    // 登录
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public String login(Model model, @RequestParam("username") String username,
                            @RequestParam("password") String password,
@@ -77,6 +81,7 @@ public class LoginController {
             return "login";
         }
     }
+    // 退出系统
     @RequestMapping(value = "/logout",method = RequestMethod.GET)
     public String logout(@CookieValue("ticket") String ticket){
         userService.logout(ticket);

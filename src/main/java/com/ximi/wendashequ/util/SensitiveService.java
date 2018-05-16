@@ -16,7 +16,7 @@ import java.util.Map;
 /**
  * Created by 单广美 on 2017/10/18.
  *
- * @Description:
+ * @Description: 敏感词服务层
  */
 @Service
 public class SensitiveService implements InitializingBean {

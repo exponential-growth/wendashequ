@@ -20,30 +20,34 @@ import java.util.List;
 /**
  * Created by 单广美 on 2017/10/16.
  *
- * @Description:
+ * @Description: 问题功能
  */
 @Controller
 @RequestMapping("/question")
 public class QuestionController {
     private static final Logger log = LoggerFactory.getLogger(QuestionController.class);
-
+    // 注入 问题服务层
     @Autowired
     private QuestionService questionService;
+    // 注入用户全局对象
     @Autowired
     private HostHolder hostHolder;
+    // 注入用户服务层
     @Autowired
     private UserService userService;
-
+    // 注入评论服务层
     @Autowired
     private CommentService commentService;
 
     @Autowired
     private LikeService likeService;
 
+    //添加问题
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     @ResponseBody
     public String addQuestion(@RequestParam("title") String title,
                               @RequestParam("content") String content){
+        //构建问题对象
         Question question = new Question();
         try{
             question.setTitle(title);
@@ -66,13 +70,15 @@ public class QuestionController {
 
         return WendaUtil.getJSONObject(1,"失败");
     }
+    //查看唯一的问题
     @RequestMapping(value = "/{id}")
     public String showQuestion(Model model, @PathVariable("id") int id){
+        // 获取问题对象
         Question question = questionService.findQuestionById(id);
 
         model.addAttribute("question",question);
         model.addAttribute("user",userService.findUserById(question.getUserId()));
-
+        //获取该问题的所有评论
         List<Comment> commentLists = commentService.selectComments(EntityType.ENTITY_QUESTION,id);
         List<ViewObject> details = new ArrayList<>();
         for (Comment comment:commentLists){
@@ -87,7 +93,7 @@ public class QuestionController {
             o.set("user",userService.findUserById(comment.getUserId()));
             details.add(o);
         }
-        //把数据地方到模型
+        //把数据添加到模型
         model.addAttribute("details",details);
         return "detail";
     }

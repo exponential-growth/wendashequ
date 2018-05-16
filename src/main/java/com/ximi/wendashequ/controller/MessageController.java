@@ -21,33 +21,39 @@ import java.util.List;
 /**
  * Created by 单广美 on 2018/3/8.
  *
- * @Description:
+ * @Description: 私信
  */
 @Controller
 public class MessageController {
 
     public static final Logger logger = LoggerFactory.getLogger(CommentController.class);
-
+    // 注入用户全局对象
     @Autowired
     private HostHolder hostHolder;
+    // 注入用户服务层
     @Autowired
     private UserService userService;
+    //注入消息服务层
     @Autowired
     private MessageService messageService;
+
+    //发布私信
     @RequestMapping(path = {"/msg/addMessage"},method= {RequestMethod.POST})
     @ResponseBody
     public String addMessage(@RequestParam("toName") String toName,
                              @RequestParam("content") String content){
 
         try {
+            //如果用户不存在
             if (hostHolder.getUser()==null){
                 return WendaUtil.getJSONObject(999,"未登录");
             }
+            //获取用户
             User user = userService.findUserByName(toName);
             if (user == null) {
                 return WendaUtil.getJSONObject(1, "用户不存在");
             }
-
+            //构建消息对象
             Message message = new Message();
             message.setCreatedDate(new Date());
             message.setFromId(hostHolder.getUser().getId());
@@ -60,11 +66,14 @@ public class MessageController {
             return WendaUtil.getJSONObject(2,"发送私信失败");
         }
     }
+    // 获取消息列表
     @RequestMapping(path = "/msg/list",method = RequestMethod.GET)
     public String showMessage(Model model){
+        // 用户是否存在
         if (hostHolder.getUser()==null){
             return "redirect:/reLogin";
         }
+        //获取消息列表
         List<Message> messageList = messageService.getMessageList(hostHolder.getUser().getId());
         List<ViewObject> viewObject = new ArrayList<>();
         int localUserId = hostHolder.getUser().getId();
@@ -84,12 +93,13 @@ public class MessageController {
         return "letter";
     }
 
+    //获取消息细节
     @RequestMapping(path = "/msg/letterDetail",method = RequestMethod.GET)
 
     public String messageDetail(@RequestParam("conversationId") String conversationId, Model model){
         List<Message> messageList = messageService.getMessages(conversationId);
         List<ViewObject> details = new ArrayList<>();
-
+        // 遍历消息列表
         for (Message message:messageList){
             ViewObject o = new ViewObject();
             o.set("message",message);
